@@ -10,18 +10,18 @@
         </div>
       </el-col>
       <el-col :span="12" class="right">
-          <Test :msg="'ChildMesg'"></Test>
+          <TestWorld :msg="'ChildMesg'"></TestWorld>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import Test from './Test.vue'
+import TestWorld from './Test.vue'
 export default {
   name: 'HelloWorld',
   components: {
-    Test
+    TestWorld
   },
   data() {
     return {
