@@ -1,6 +1,6 @@
 {
   "name": "music-player-vitepress-plugin-for-mxkblog",
-  "version": "0.2.6",
+  "version": "0.2.9",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -24,6 +24,9 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "file-loader": "^6.2.0",
+    "node-sass": "^9.0.0",
+    "sass": "^1.83.4",
+    "sass-loader": "^16.0.4",
     "url-loader": "^4.1.1"
   },
   "main": "package/main.js",

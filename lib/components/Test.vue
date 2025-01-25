@@ -1,6 +1,9 @@
 <template>
   <div class="test">
-    <div>{{ msg }}</div>
+    <div class="childMsg">
+      {{ msg }}
+        <span class="spanMsg">{{ msg }}</span>
+    </div>
   </div>
 </template>
 
@@ -24,19 +27,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang = 'scss' scoped>
+.childMsg{
+  background-color: red;
+  .spanMsg{ 
+    background-color: yellow
+  }
 }
 </style>

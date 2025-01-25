@@ -1,7 +1,7 @@
 <template>
   <div class = "music-layout">
     <el-row>
-      <el-col  class="left">
+      <el-col :span="12" class="left">
         <img src="../assets/bar.png" alt="no bar image">
         <div class="img-outer-container">
           <div class="img-album">
@@ -9,8 +9,8 @@
           </div>
         </div>
       </el-col>
-      <el-col class="right">
-          <Test :msg="childMesg"></Test>
+      <el-col :span="12" class="right">
+          <Test :msg="'ChildMesg'"></Test>
       </el-col>
     </el-row>
   </div>
@@ -45,8 +45,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang = 'scss' scoped>
 .music-layout{
-  
+  .img-outer-container {
+    background: red;
+  }
 }
+
 </style>

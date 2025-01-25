@@ -42,7 +42,7 @@ module.exports = defineConfig({
   //   plugins: [
   //     new webpack.optimize.LimitChunkCountPlugin({
   //       maxChunks: 1
-  //     })
+  //     }),
   //   ],
   //   module: {
   //     rules: [
@@ -70,7 +70,7 @@ module.exports = defineConfig({
   //   }
   // },
   // css: {
-  //   extract: false
+  //   extract: false,
   // }
 
 })
