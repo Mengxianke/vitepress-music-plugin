@@ -8,10 +8,20 @@ module.exports = defineConfig({
   lintOnSave: false,
   configureWebpack: {
     entry: './src/main.js',
+    resolve: {
+      alias: {
+        '@': path.resolve('src')
+      }
+    },
   },
   // outputDir: path.join(__dirname, '/package'),
   // configureWebpack: {
   //   entry: './lib/index.js',
+  //   resolve: {
+  //     alias: {
+  //       '@': path.resolve('lib')
+  //     }
+  //   },
   //   output: {
   //     filename: '[name].js',  
   //     library: 'musicPlayer',
@@ -26,11 +36,38 @@ module.exports = defineConfig({
   //       commonjs2: 'vue',
   //       amd: 'vue'
   //     }, 
-  //     vuex: 'vuex'
+  //     vuex: 'vuex',
+  //     'element-ui': 'ElementUI'
   //   },
   //   plugins: [
-
-  //   ]
+  //     new webpack.optimize.LimitChunkCountPlugin({
+  //       maxChunks: 1
+  //     })
+  //   ],
+  //   module: {
+  //     rules: [
+  //       {
+  //         test: /.(jpe?g|png|gif|svg)$/,
+  //         // use: [
+  //         //   {
+  //         //     loader: 'url-loader',
+  //         //     options: {
+  //         //       name: 'assets/[name].[hash:6].[ext]',
+  //         //       limit: 80000,
+  //         //       fallback: 'file-loader', 
+  //         //     }
+  //         //   }
+  //         // ]
+  //         type: 'asset',
+  //         parser: {
+  //           //转base64的条件
+  //           dataUrlCondition: {
+  //           maxSize: 100 * 1024, // 12kb
+  //           }
+  //         }, 
+  //       },
+  //     ]
+  //   }
   // },
   // css: {
   //   extract: false
