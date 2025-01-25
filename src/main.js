@@ -1,13 +1,19 @@
-import HelloWorld from './components/HelloWorld.vue';
-import Vue from 'vue';
+import { createApp } from 'vue'
+import App from './App.vue'
+// import MusicPlayerPlugin from '../lib/index';
+
+// const app = createApp(App)
+
+// app.use(MusicPlayerPlugin);
+
+// app.mount('#app')
 
 
-export function VitePluginVitePressMusicPlayer() {
-  Vue.component('HelloWorld', HelloWorld);
-  console.log("Vue is valid");
-  console.log(Vue !== null && Vue !== undefined);
-  console.log("Vue is valid");
-  return {   
-    name: 'vite-plugin-vitepress-music-player',
-  }
-}
+import MusicPlayerPlugin from '../package/main.js';
+const app = createApp(App)
+console.log("************");
+console.log(MusicPlayerPlugin);
+console.log("************");
+app.use(MusicPlayerPlugin);
+
+app.mount('#app')
