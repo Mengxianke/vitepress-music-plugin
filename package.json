@@ -1,6 +1,6 @@
 {
   "name": "music-player-vitepress-plugin-for-mxkblog",
-  "version": "0.1.8",
+  "version": "0.2.2",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,9 @@
   "author": "mxk",
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vuex": "^4.1.0",
+    "element-plus": "^2.9.3"
   },
   "license": "ISC",
   "devDependencies": {

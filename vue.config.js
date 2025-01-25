@@ -10,7 +10,6 @@ module.exports = defineConfig({
     entry: './src/main.js',
   },
   // outputDir: path.join(__dirname, '/package'),
-  
   // configureWebpack: {
   //   entry: './lib/index.js',
   //   output: {
@@ -18,7 +17,7 @@ module.exports = defineConfig({
   //     library: 'musicPlayer',
   //     libraryTarget: 'umd',
   //     libraryExport: 'default',
-  //     // umdNamedDefine: true
+  //     globalObject: 'this'
   //   },
   //   externals: {
   //     vue: {  //将vue依赖 "外部化"，不打包进组件库
@@ -26,9 +25,15 @@ module.exports = defineConfig({
   //       commonjs: 'vue',
   //       commonjs2: 'vue',
   //       amd: 'vue'
-  //     }
+  //     }, 
+  //     vuex: 'vuex'
   //   },
   //   plugins: [
+
   //   ]
   // },
+  // css: {
+  //   extract: false
+  // }
+
 })

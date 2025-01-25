@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
+    <el-button @click="incrementCount">检查Vuex</el-button>
     <h1>{{ msg }}</h1>
+    <div>{{ count }}</div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -27,14 +29,29 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <Test :msg="'SubChildMessage'"></Test>
   </div>
 </template>
 
 <script>
+import Test from './Test.vue'
 export default {
   name: 'HelloWorld',
+  components: {
+    // Test
+  },
   props: {
     msg: String
+  },
+  computed: {
+    count() {
+      return this.$store.state.count
+    }
+  },
+  methods: {
+    incrementCount() {
+      this.$store.dispatch('increment');
+    }
   }
 }
 </script>
