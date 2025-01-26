@@ -36,6 +36,12 @@
         </svg>
 
       </div>
+      <audio
+      id="audio"
+      @canplay="ready"
+      src="https://music.163.com/song/media/outer/url?id=19032267"
+      ref="audio"
+    ></audio>
     </el-row>
   </div>
 </template>
@@ -54,6 +60,7 @@ export default {
       progress: '50%',
       currentTime: 0,
       totalTime: 0,
+      musicSrc: 'https://music.163.com/song/media/outer/url?id=19032267',
     }
   },
   props: {
@@ -62,11 +69,20 @@ export default {
   computed: {
     count() {
       return this.$store.state.count
-    }
+    },
+    audio() {
+      return this.$refs.audio
+    },
   },
   methods: {
     incrementCount() {
       this.$store.dispatch('increment');
+    },
+    async ready() {
+      console.log('audio is ready');
+      setTimeout(() => {
+        this.audio.play();
+      }, 1000)
     }
   }
 }
