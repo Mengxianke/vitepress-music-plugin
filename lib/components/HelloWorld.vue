@@ -7,7 +7,7 @@
             <path d="M10.229 5.055a.5.5 0 0 0-.52.038L7 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407v-5a.5.5 0 0 0-.271-.445"/>
           </svg>
           
-          <svg clas xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+          <svg @click="playMusic" clas xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
             <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
           </svg>
 
@@ -74,15 +74,19 @@ export default {
       return this.$refs.audio
     },
   },
+  mounted() {
+    console.log("call audio play");
+    
+  },
   methods: {
     incrementCount() {
       this.$store.dispatch('increment');
     },
     async ready() {
       console.log('audio is ready');
-      setTimeout(() => {
-        this.audio.play();
-      }, 1000)
+    },
+    playMusic() {
+      this.audio.play();
     }
   }
 }
