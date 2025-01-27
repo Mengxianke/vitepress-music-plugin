@@ -96,12 +96,16 @@ export default {
 <style lang = 'scss' scoped>
 .music-player-layout{
   width: 100%;
+  min-width: 600px;
   .music-player-bar {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     .music-control-wrap {
+      display: flex;
+      width: 100px;
+      flex-shrink: 0;
       .bi-skip-start-circle{
         cursor: pointer;
       }
@@ -115,7 +119,8 @@ export default {
       }
     }
     .progress-bar-wrap {
-      width: 500px;
+      flex-grow: 1;
+      flex-shrink: 1;
       position: relative;
       display: flex;
       align-items: center;
@@ -144,6 +149,8 @@ export default {
       }
     }
     .function-wrap{
+      width: 100px;
+      display: flex;
       .bi-pip{
         margin-left: 10px;
         cursor: pointer;
