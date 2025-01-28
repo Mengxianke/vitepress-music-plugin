@@ -40,7 +40,7 @@
 
         <el-popover 
         :show-arrow="false" 
-        :width="400" 
+        :width="1000" 
         placement='bottom' 
         style="display: flex;"
         trigger="click"
@@ -53,11 +53,7 @@
                 <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
               </svg>
             </template>
-             <!-- <el-table :data="gridData">
-              <el-table-column width="150" property="date" label="date" />
-              <el-table-column width="100" property="name" label="name" />
-              <el-table-column width="300" property="address" label="address" />
-             </el-table> -->
+            <Collections :collections="musicCollections"></Collections>
         </el-popover>
 
       </div>
@@ -79,11 +75,12 @@
 import { formatTime } from '../utils'
 import { mapGetters, mapState } from 'vuex'
 import { PlayerState } from '../model/playerState'
+import Collections from './Collections.vue'
 
 export default {
   name: 'HelloWorld',
   components: {
-
+    Collections
   },
   data() {
     return {
