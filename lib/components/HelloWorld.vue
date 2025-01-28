@@ -29,7 +29,7 @@
        
       <div class="progress-bar-wrap">
         <div class="progress-bar" :style="{width: progress}"></div>
-        <div class="time">{{formatTime(currentTime)}} / {{formatTime(totalTime)}}</div>
+        <div class="time">{{formatTime(curTime)}} / {{formatTime(songDuration)}}</div>
       </div>
 
       <div class="function-wrap">
@@ -88,9 +88,6 @@ export default {
   data() {
     return {
       formatTime,
-      progress: '50%',
-      currentTime: 0,
-      totalTime: 0,
       musicSrc: '',
     }
   },
@@ -120,6 +117,15 @@ export default {
       this.playerState === PlayerState.ready || 
       this.playerState === PlayerState.end || 
       this.playerState === PlayerState.notReady
+    },
+    curTime() {
+      return this.$store.getters['musicPlayer/curTime'];
+    },
+    songDuration() {
+      return this.$store.getters['musicPlayer/songDuration'];
+    },
+    progress() {
+      return Math.ceil(this.curTime / this.songDuration * 100) + '%';
     }
   },
   watch: {
@@ -164,7 +170,11 @@ export default {
       this.musicSrc = link;
     },
     updateTime(e) {
+      const time = e.target.currentTime;
       console.log(`audito updateTime called: ${e}`);
+      this.$store.dispatch('musicPlayer/setCurTime', {
+        time: time
+      });
     },
     playing() {
       this.$store.dispatch('musicPlayer/changePlayerState', {
@@ -200,6 +210,7 @@ export default {
       })
     },
     stopMusic() {
+      console.log(`stop Music called`);
       this.pauseMusic();
       // 将当前事件归零
     },
