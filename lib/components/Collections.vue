@@ -13,6 +13,7 @@
                 </svg>
             </div>
              <el-table 
+             style="width: 100%; "
              :show-header="false" 
              :data="_collections"
              :max-height="500"
@@ -36,7 +37,19 @@
             </el-table>
         </el-column>
         <el-column :span="12" class="music-lyric">
-
+            <el-scrollbar max-height="500px">
+                <div
+                class="lyric-item"
+                ref="lyric"
+                v-for="(lyric,index) in parseLyric"
+                :key="index"
+                >
+                <p
+                    :key="contentIndex"
+                    class="lyric-text"
+                >{{ lyric }}</p>
+                </div>
+            </el-scrollbar>
         </el-column>
     </el-row>
    
@@ -60,11 +73,23 @@ export default {
   data() {
     return {
         _collections: [],
-        selectedCollection: undefined
+        selectedCollection: undefined,
+        lyric: [],
     }
   },
   computed: {
-
+    parseLyric() {
+        if (this.selectedCollection && this.selectedCollection.lyric) {
+            let res = this.selectedCollection.lyric.split('\n').filter(content => Boolean(content))
+            console.log("lyric parse result");
+            console.log(res);
+            console.log("lyric parse result");
+            return res;
+        } else {
+            console.log("lyric parse but lyric data not exist");
+            return [];
+        }
+    }
   },
   watch: {
     collections: {
@@ -75,7 +100,7 @@ export default {
             });
         },
       immediate: true
-    }
+    },
   },
   mounted() {
     console.log("collections mounted"); 
@@ -83,7 +108,6 @@ export default {
   methods: {
     addCollection() {
         // 判断是否有要添加的collection, 如果有，则不处理
-        
         // 添加一个collection
         console.log(`add a collection`);
         const collection = new Collection();
