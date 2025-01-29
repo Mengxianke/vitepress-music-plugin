@@ -76,7 +76,7 @@ import { formatTime } from '../utils'
 import { mapGetters, mapState } from 'vuex'
 import { PlayerState } from '../model/playerState'
 import Collections from './Collections.vue'
-
+import { getMusicDetail } from '../api'
 export default {
   name: 'HelloWorld',
   components: {
@@ -160,6 +160,15 @@ export default {
   },
   mounted() {
     console.log("music player mounted"); 
+    // 
+    console.log("**********");
+    console.log(this.$axios);
+    getMusicDetail('517567145').then(res => {
+      console.log("&&&&&&&&&");
+      console.log(res);
+      console.log("&&&&&&&&&");
+    })
+    console.log("**********");
   },
   methods: {
     setMusicLink(link) {

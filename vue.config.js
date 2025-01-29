@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require("webpack");
-
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { defineConfig } = require('@vue/cli-service')
 const config = () => {
   const node_env = process.env.NODE_ENV;
@@ -33,12 +33,14 @@ const config = () => {
             amd: 'vue'
           }, 
           vuex: 'vuex',
-          'element-ui': 'ElementUI'
+          'element-ui': 'ElementUI',
+          axios: 'axios'
         },
         plugins: [
           new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1
           }),
+          new BundleAnalyzerPlugin(),
         ],
         module: {
           rules: [
@@ -75,6 +77,9 @@ const config = () => {
       lintOnSave: false,
       configureWebpack: {
         entry: './src/main.js',
+        plugins:[
+          new BundleAnalyzerPlugin(),
+        ],
         resolve: {
           alias: {
             '@': path.resolve('src')
