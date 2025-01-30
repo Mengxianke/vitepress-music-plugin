@@ -76,7 +76,7 @@ import { formatTime } from '../utils'
 import { mapGetters, mapState } from 'vuex'
 import { PlayerState } from '../model/playerState'
 import Collections from './Collections.vue'
-import { getMusicDetail } from '../api'
+import { getMusicDetail, getBackEndHelloWorld } from '../api'
 export default {
   name: 'HelloWorld',
   components: {
@@ -169,6 +169,11 @@ export default {
       console.log("&&&&&&&&&");
     })
     console.log("**********");
+    getBackEndHelloWorld().then(res => {
+      console.log("^^^^^^^^^^^^^^^^");
+      console.log(res);
+      console.log("^^^^^^^^^^^^^^^^");
+    });
   },
   methods: {
     setMusicLink(link) {
