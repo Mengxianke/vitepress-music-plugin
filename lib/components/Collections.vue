@@ -154,6 +154,7 @@ export default {
     min-width: 700px;
     .collections-row{
         .collection-column{
+            flex-grow: 1;
             .music-id-input{
                 min-height: 30px;
             }
@@ -169,6 +170,9 @@ export default {
                     margin-left: 10px;
                 }
             }
+        }
+        .music-lyric{
+            flex-shrink: 1;
         }
     }
 }
