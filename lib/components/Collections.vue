@@ -13,6 +13,7 @@
                 </svg>
             </div>
              <el-table 
+             v-loading="loading"
              style="width: 100%; "
              :show-header="false" 
              :data="_collections"
@@ -65,6 +66,10 @@ export default {
         type: Array,
         required: true,
         default: [],
+    },
+    loading: {
+        type: Boolean,
+        default: false
     }
   },
   components: {
@@ -117,8 +122,15 @@ export default {
     },
     deleteCollection() {
         console.log(`deleteCollection called: selectedCollection title: ${this.selectedCollection.title}`);
+        const data = {
+            id: this.selectedCollection.id
+        }
+        this.$emit('deleteCollection', data);
     },
     handleCurrentChange(music) {
+        if (!music) {
+            return;
+        }
         console.log(`user select a collection: ${music.id}`);
         this.selectedCollection = music;
         console.log(`local variable selectedCollection: ${this.selectedCollection.id}`);
@@ -126,8 +138,11 @@ export default {
     confirmCollectMusic(index, music) {
         console.log(`confirm collect music called: index: ${index} musicId: ${music.id}`);
         // 请求后端，保存用户Id, 后端做校验
-        music.isEditing = false;
-
+        // music.isEditing = false;
+        const data = {
+            id: music.id
+        };
+        this.$emit('confirmCollectMusic', data);
     }   
   }
 }

@@ -53,7 +53,12 @@
                 <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
               </svg>
             </template>
-            <Collections :collections="musicCollections"></Collections>
+            <Collections 
+            :collections="musicCollections"
+            :loading="collectionsLoading"
+            @confirmCollectMusic="collectMusic"
+            @deleteCollection="deleteCollection"
+            ></Collections>
         </el-popover>
 
       </div>
@@ -76,7 +81,7 @@ import { formatTime } from '../utils'
 import { mapGetters, mapState } from 'vuex'
 import { PlayerState } from '../model/playerState'
 import Collections from './Collections.vue'
-import { getMusicDetail, getBackEndHelloWorld } from '../api'
+import { getAllMusicCollections, collectMusic, deleteMusic } from '../api'
 export default {
   name: 'HelloWorld',
   components: {
@@ -86,6 +91,7 @@ export default {
     return {
       formatTime,
       musicSrc: '',
+      collectionsLoading: false,
     }
   },
   props: {
@@ -135,6 +141,10 @@ export default {
     },
     curSong: {
       handler(newVal, oldVal) {
+        if (!newVal) {
+          console.log(`curSong change handler, but newVal not exist`);
+          return;
+        }
         console.log(`curSong change to: ${newVal.id} ${newVal.title} ${newVal.link}`);
         const link = newVal.link;
         if (this.playerState === PlayerState.ready) {
@@ -160,22 +170,37 @@ export default {
   },
   mounted() {
     console.log("music player mounted"); 
-    // 
-    console.log("**********");
-    console.log(this.$axios);
-    getMusicDetail('517567145').then(res => {
-      console.log("&&&&&&&&&");
-      console.log(res);
-      console.log("&&&&&&&&&");
-    })
-    console.log("**********");
-    getBackEndHelloWorld().then(res => {
-      console.log("^^^^^^^^^^^^^^^^");
-      console.log(res);
-      console.log("^^^^^^^^^^^^^^^^");
-    });
+    this.getMusicCollections();
   },
   methods: {
+    async getMusicCollections() {
+      this.collectionsLoading = true;
+      return getAllMusicCollections().then(res => {
+      console.log(`get all muisc collections`);
+      console.log(res);
+      const collections = res;
+      console.log(`get all muisc collections`);
+      this.$store.dispatch('musicPlayer/updateMusicCollections', {
+        collections: collections
+      });
+      return res;
+    }).finally(() => {
+        this.collectionsLoading = false;
+      });
+    },
+    async collectMusic(payload) {
+      const id = payload.id;
+      console.log(`collect Music from parent component: ${id}`);
+      const resp = await collectMusic(id);
+      await this.getMusicCollections();
+      return resp;
+    },
+    async deleteCollection(payload) {
+      const id = payload.id;
+      const resp = await deleteMusic(id);
+      await this.getMusicCollections();
+      return resp;
+    },
     setMusicLink(link) {
       console.log(`set Music link called: ${link}`);
       this.musicSrc = link;
